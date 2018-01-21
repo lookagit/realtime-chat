@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
-  ScrollView,
 } from 'react-native';
 import Pusher from 'pusher-js/react-native';
 import ChatItem from './ChatItem';
@@ -33,6 +32,7 @@ class MapCont extends Component {
 
     var channel = this.pusher.subscribe('my-channel');
     channel.bind('my-event', (data) => {
+      console.log("DATAAA ", data);
       this.setState({
         messages: [...this.state.messages, {
           message: data.message,
