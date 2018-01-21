@@ -74,14 +74,16 @@ class MapCont extends Component {
           height: null,
         }}
         resizeMode={'contain'}>
-        <ScrollView style={{flex: 8, borderWidth: 2, borderColor: 'blue'}}>
-          {
-            messages.length ? messages.map((item, key) => (
-              <ChatItem chatName={item.name} chatMessage={item.message} />
-            )) : null
-          }
-        </ScrollView>
-        <View style={{flex: 2, backgroundColor: '#c0e3ed'}}>
+        <View style={{flex: 8,}}>
+          <ScrollView>
+            {
+              messages.length ? messages.map((item, key) => (
+                <ChatItem chatName={item.name} chatMessage={item.message} key={key} />
+              )) : null
+            }
+          </ScrollView>
+        </View>
+        <View style={{flex: 3, backgroundColor: '#c0e3ed'}}>
           <ScrollView>
             <TextInput
               placeholder="Unesite ime..."
