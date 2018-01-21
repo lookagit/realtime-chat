@@ -119,22 +119,4 @@ class MapCont extends Component {
     )
   }
 }
-
-class BackGroundImage extends React.Component {
-  render() {
-    return(
-      <Image 
-        style={{
-          flex: 1,
-            width: null,
-            height: null,
-            resizeMode: 'cover'
-        }} 
-        source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
-        >
-        {this.props.children}
-      </Image>
-    );
-  }
-}
 export default MapCont;
