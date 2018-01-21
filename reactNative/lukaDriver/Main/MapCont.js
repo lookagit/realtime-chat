@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  ScrollView,
 } from 'react-native';
 import Pusher from 'pusher-js/react-native';
 
@@ -55,46 +56,66 @@ class MapCont extends Component {
   }
   render() {
     return(
-    <ImageBackground
-      source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
-      style={{
-        flex: 1,
-        width: null,
-        height: null,
-      }}  
-      resizeMode={'contain'}>   
       <View style={{flex:1}}>
-        <View style={{flex: 8, borderWidth: 2, borderColor: 'blue'}}> 
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>****Chat****</Text>
-          <Text>{this.state.message}</Text>
+      <ImageBackground
+        source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
+        style={{
+          flex: 1,
+          width: null,
+          height: null,
+        }}  
+        resizeMode={'contain'}>   
+        <View style={{flex: 8, borderWidth: 2, borderColor: '#007698', borderRadius: 10,}}> 
+          <Text style={{fontSize: 18, fontWeight: 'bold',alignSelf: 'center'}}>****Chat****</Text>
           <Text>{this.state.name}</Text>
+          <Text>{this.state.message}</Text>
         </View>
-        <View style={{flex: 2}}>
-          <TextInput
-            placeholder="Unesite ime..."
-            onChangeText={(val) => {
-               this.setState({
-                 name: val,
-               })
-            }}
-          />
-          <TextInput
-            placeholder="Unesite Poruku..."
-            multiline={true}
-            onChangeText={(val) => {
-               this.setState({
-                 message: val,
-               })
-            }}
-          />
-          <TouchableOpacity onPress={() => {
-              this.createTriger();
-            }}>
-            <Text>AJDE KLIKNI</Text>
-          </TouchableOpacity>
+        <View style={{flex: 2, backgroundColor: '#c0e3ed'}}>
+          <ScrollView>
+            <TextInput
+              placeholder="Unesite ime..."
+              style={{
+                borderWidth: 1,
+                borderRadius: 10,
+                borderColor: '#007698',
+                marginBottom: 5,
+                backgroundColor: 'white'
+              }}
+              underlineColorAndroid={'transparent'}
+              onChangeText={(val) => {
+                 this.setState({
+                   name: val,
+                 })
+              }}
+            />
+            <TextInput
+              placeholder="Unesite Poruku..."
+              style={{
+                borderWidth: 1,
+                borderRadius: 10,
+                borderColor: '#007698',
+                backgroundColor: 'white',
+                marginBottom: 5,
+              }}
+              underlineColorAndroid={'transparent'}
+              multiline={true}
+              onChangeText={(val) => {
+                 this.setState({
+                   message: val,
+                 })
+              }}
+            />
+            <TouchableOpacity
+              style={{width: '100%', height: 50, backgroundColor: '#007698', opacity: 0.6, borderWidth: 1, borderColor: 'transparent', borderRadius: 15,justifyContent: 'center' }}  
+              onPress={() => {
+                this.createTriger();
+              }}>
+              <Text style={{fontSize: 18, fontWeight: 'bold',alignSelf: 'center', color: 'white'}}>Send message</Text>
+            </TouchableOpacity>
+          </ScrollView>
         </View>
+      </ImageBackground>   
       </View>
-    </ImageBackground> 
     )
   }
 }
