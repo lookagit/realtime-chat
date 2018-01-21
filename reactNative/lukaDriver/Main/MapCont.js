@@ -6,6 +6,8 @@ import {
   Alert,
   TextInput,
   TouchableOpacity,
+  Image,
+  ImageBackground,
 } from 'react-native';
 import Pusher from 'pusher-js/react-native';
 
@@ -53,33 +55,65 @@ class MapCont extends Component {
   }
   render() {
     return(
-      <View>
-        <Text>{this.state.message}</Text>
-        <Text>{this.state.name}</Text>
-        <TextInput
-          placeholder="Unesite ime..."
-          onChangeText={(val) => {
-             this.setState({
-               name: val,
-             })
-          }}
-        />
-        <TextInput
-          placeholder="Unesite Poruku..."
-          multiline={true}
-          onChangeText={(val) => {
-             this.setState({
-               message: val,
-             })
-          }}
-        />
-        <TouchableOpacity onPress={() => {
-          this.createTriger();
-        }}>
-          <Text>AJDE KLIKNI</Text>
-        </TouchableOpacity>
+    <ImageBackground
+      source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
+      style={{
+        flex: 1,
+        width: null,
+        height: null,
+      }}  
+      resizeMode={'contain'}>   
+      <View style={{flex:1}}>
+        <View style={{flex: 8, borderWidth: 2, borderColor: 'blue'}}> 
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>****Chat****</Text>
+          <Text>{this.state.message}</Text>
+          <Text>{this.state.name}</Text>
+        </View>
+        <View style={{flex: 2}}>
+          <TextInput
+            placeholder="Unesite ime..."
+            onChangeText={(val) => {
+               this.setState({
+                 name: val,
+               })
+            }}
+          />
+          <TextInput
+            placeholder="Unesite Poruku..."
+            multiline={true}
+            onChangeText={(val) => {
+               this.setState({
+                 message: val,
+               })
+            }}
+          />
+          <TouchableOpacity onPress={() => {
+              this.createTriger();
+            }}>
+            <Text>AJDE KLIKNI</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+    </ImageBackground> 
     )
+  }
+}
+
+class BackGroundImage extends React.Component {
+  render() {
+    return(
+      <Image 
+        style={{
+          flex: 1,
+            width: null,
+            height: null,
+            resizeMode: 'cover'
+        }} 
+        source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
+        >
+        {this.props.children}
+      </Image>
+    );
   }
 }
 export default MapCont;
