@@ -3,18 +3,19 @@ import {
   StyleSheet,
   Text,
   View,
-  Alert,
+  ScrollView,
   TextInput,
   TouchableOpacity,
   Image,
   ImageBackground,
 } from 'react-native';
 import Pusher from 'pusher-js/react-native';
-
+import ChatItem from './ChatItem';
 class MapCont extends Component {
   state = {
-    message: 'Unknown',
-    name: 'Unknown',
+    message: '',
+    name: '',
+    messages: [],
   }
   constructor(props) {
     super(props);
@@ -32,10 +33,12 @@ class MapCont extends Component {
     var channel = this.pusher.subscribe('my-channel');
     channel.bind('my-event', (data) => {
       this.setState({
-        message: data.message,
-        name: data.ime,
+        messages: [...this.state.messages, {
+          message: data.message,
+          name: data.name,
+        }]
       })
-      console.log("JA SAM DATAAAA ", data);
+      //ZVUK OVDE :D 
     });
   }
   createTriger = async () => {
@@ -47,13 +50,19 @@ class MapCont extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ime: this.state.name,
+          name: this.state.name,
           message: this.state.message,
         }),
       });
+      this.setState({
+        name: '',
+        message: '',
+      })
     }
   }
   render() {
+    let {messages} = this.state || [];
+    console.log("MESSS ", messages);
     return(
     <ImageBackground
       source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
@@ -61,17 +70,20 @@ class MapCont extends Component {
         flex: 1,
         width: null,
         height: null,
-      }}  
-      resizeMode={'contain'}>   
+      }}
+      resizeMode={'contain'}>
       <View style={{flex:1}}>
-        <View style={{flex: 8, borderWidth: 2, borderColor: 'blue'}}> 
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>****Chat****</Text>
-          <Text>{this.state.message}</Text>
-          <Text>{this.state.name}</Text>
-        </View>
+        <ScrollView style={{flex: 8, borderWidth: 2, borderColor: 'blue'}}>
+          {
+            messages.length ? messages.map((item, key) => (
+              <ChatItem chatName={item.name} chatMessage={item.message} />
+            )) : null
+          }
+        </ScrollView>
         <View style={{flex: 2}}>
           <TextInput
             placeholder="Unesite ime..."
+            value={this.state.name}
             onChangeText={(val) => {
                this.setState({
                  name: val,
@@ -81,6 +93,7 @@ class MapCont extends Component {
           <TextInput
             placeholder="Unesite Poruku..."
             multiline={true}
+            value={this.state.message}
             onChangeText={(val) => {
                this.setState({
                  message: val,
@@ -94,7 +107,7 @@ class MapCont extends Component {
           </TouchableOpacity>
         </View>
       </View>
-    </ImageBackground> 
+    </ImageBackground>
     )
   }
 }
@@ -102,13 +115,13 @@ class MapCont extends Component {
 class BackGroundImage extends React.Component {
   render() {
     return(
-      <Image 
+      <Image
         style={{
           flex: 1,
             width: null,
             height: null,
             resizeMode: 'cover'
-        }} 
+        }}
         source={{uri:'http://www.tbaytel.net/Portals/_default/Skins/tbaytel-eleven-seventeen/img/livechat-tab-icon.png'}}
         >
         {this.props.children}
