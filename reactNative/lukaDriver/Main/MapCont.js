@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Pusher from 'pusher-js/react-native';
 import ChatItem from './ChatItem';
+import PushNotification from 'react-native-push-notification';
 class MapCont extends Component {
   state = {
     message: '',
@@ -39,7 +40,16 @@ class MapCont extends Component {
           name: data.name,
         }]
       })
-      //ZVUK OVDE :D
+      PushNotification.localNotificationSchedule({
+        message: data.message,
+        date: new Date(Date.now() + (60 * 1000)),
+        repeatType: 'time',
+        repeatTime: 60 * 1000,
+        soundName: 'default',
+        vibration: 300,
+        color: "red", 
+        title: "Baky Lukas Chat "
+    });
     });
   }
   createTriger = async () => {
@@ -61,7 +71,7 @@ class MapCont extends Component {
       })
     }
   }
-  render() {
+  render() { 
     let {messages} = this.state || [];
     console.log("MESSS ", messages);
     return(
