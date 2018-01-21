@@ -38,7 +38,7 @@ class MapCont extends Component {
   }
   createTriger = async () => {
     if(this.state.name !== 'Unknown' && this.state.message !== 'Unknown') {
-      let getServer = await fetch('https://server-hryyliokwv.now.sh', {
+      let getServer = await fetch('https://lubaks-chat.herokuapp.com/', {
         method: 'POST',
         headers: {
           Accept: 'application/json',
