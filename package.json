@@ -1,0 +1,19 @@
+{
+  "name": "lubakchat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./server/server.js",
+  "scripts": {
+    "start-server": "npm install --prefix server && npm start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lookagit/realtime-chat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lookagit/realtime-chat/issues"
+  },
+  "homepage": "https://github.com/lookagit/realtime-chat#readme"
+}
