@@ -37,7 +37,7 @@ class MapCont extends Component {
     });
   }
   createTriger = async () => {
-    if(this.state.name !== 'Unknown' && this.state.message !== 'Unknown') {
+    if(this.state.name !== '' && this.state.message !== '') {
       let getServer = await fetch('https://lubaks-chat.herokuapp.com/', {
         method: 'POST',
         headers: {
