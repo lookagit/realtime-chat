@@ -7,7 +7,7 @@ import {
 const ChatItem = ({chatName, chatMessage}) => (
   <View style={{flexDirection: 'column', borderWidth: 1, width: '100%', borderColor: '#bada55'}}>
     <Text>From: {chatName}</Text>
-    <Text>{chatMessage}</Text>
+    <Text>Message: {chatMessage}</Text>
   </View>
 )
 export default ChatItem;
