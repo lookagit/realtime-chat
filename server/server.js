@@ -22,7 +22,7 @@ function getRandomInt(max) {
 
 app.post('/', function(req, res) {
   pusher.trigger('my-channel', 'my-event', {
-    "ime": req.body.name,
+    "name": req.body.name,
     "message": req.body.message,
   });
   console.log('req ', req.body);
